@@ -5,11 +5,10 @@ import $ from 'jquery'
 const functionName = 'core_user_get_users_by_field'
 
 const values = [
-    'tluger@pacificcollege.edu'
+    2
 ]
 
-const field = 'email'
-
+const field = 'id' // idnumber, email, username
 
 const data = {
     wstoken: key.token,
@@ -44,12 +43,6 @@ class GetUsers extends React.Component {
             }
         )
     }
-
-    // componentDidUpdate() {
-    //     this.state.data.map((key, value) => {
-    //         return (<li key={key}>{value}</li>)
-    //     })
-    // }
     
     render() {
         return (
@@ -58,10 +51,10 @@ class GetUsers extends React.Component {
                     {
                         this.state.data.map((user, key) => (
                             <>
-                                <li key={`${key}1`}>{user.username}</li>
-                                <li key={`${key}2`}>{user.email}</li>
-                                <li key={`${key}3`}>{user.firstname}</li>
-                                <li key={`${key}4`}>{user.lastname}</li>
+                                {user.username}<br/>
+                                {user.email}<br/>
+                                {user.firstname}<br/>
+                                {user.lastname}<br/>
                             </>
                         ))
                     }
