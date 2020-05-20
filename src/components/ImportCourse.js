@@ -2,40 +2,46 @@ import React from 'react'
 import { key } from '../key'
 import $ from 'jquery'
 
-const functionName = 'core_course_get_courses_by_field'
+const functionName = 'core_course_import_course'
 
-const value = 'WS800.MS.2018W.SD'
-
-const field = 'shortname' // id's, shortname, idnumber, category
+const importFrom = 294
+const importTo = 325
+const deleteContent = 1
+const options = {
+    activities: 1,
+    blocks: 1,
+    filters: 1
+}
 
 const data = {
     wstoken: key.token,
     wsfunction: functionName,
     moodlewsrestformat: 'json',
-    field,
-    value
+    importfrom: importFrom,
+    importto: importTo,
+    deletecontent: deleteContent
 }
 
-class GetCourses extends React.Component {
+class ImportCourse extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             responseText: '',
-            data: []
+            statusText: ''
         }
     }
 
     componentDidMount() {
         const response = $.ajax(
             {   
-                type: 'GET',
+                type: 'POST',
                 data: data,
                 url: key.url,
                 complete: () => {
                     console.log(response)
                     this.setState({
                         responseText: response.responseText,
-                        data: response.responseJSON
+                        statusText: response.statusText
                     })
                 }
             }
@@ -45,10 +51,11 @@ class GetCourses extends React.Component {
     render() {
         return (
             <div>
-                {(this.state.data.courses) && this.state.data.courses[0].displayname}
+                <p>{this.state.statusText}</p>
+                <p>{this.state.responseText}</p>
             </div>
         )
     }
 }
 
-export default GetCourses
+export default ImportCourse

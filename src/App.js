@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 import GetUsers from './components/GetUsers'
 import GetCourses from './components/GetCourses'
+import ImportCourse from './components/ImportCourse'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <header className="App-header">
         <GetUsers />
         <GetCourses />
+        <ImportCourse />
       </header>
     </div>
   );
