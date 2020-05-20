@@ -47,18 +47,16 @@ class GetUsers extends React.Component {
     render() {
         return (
             <div>
-                <ul>
-                    {
-                        this.state.data.map((user, key) => (
-                            <>
-                                {user.username}<br/>
-                                {user.email}<br/>
-                                {user.firstname}<br/>
-                                {user.lastname}<br/>
-                            </>
-                        ))
-                    }
-                </ul>
+                {
+                    this.state.data.map((user, key) => (
+                        <>
+                            {user.username}<br/>
+                            {user.email}<br/>
+                            {user.firstname}<br/>
+                            {user.lastname}<br/>
+                        </>
+                    ))
+                }
             </div>
         )
     }
