@@ -20,7 +20,7 @@ const data = {
     users: userstocreate
 }
 
-class GetUsers extends React.Component {
+class CreateUsers extends React.Component {
     constructor(props) {
         super(props)
         this.state = {

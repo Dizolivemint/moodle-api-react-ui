@@ -49,4 +49,4 @@ const importCourse = ({
     courseTargetId,
 })
 
-export { createUser, getUsers, importCourse }
+export { createCourse, getCourses, importCourse }
