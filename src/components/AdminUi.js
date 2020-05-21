@@ -8,8 +8,8 @@ class AdminUi extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            getUsers: true,
-            getCourses: false,
+            getUsers: false,
+            getCourses: true,
             importCourses: false
 
         }
@@ -17,12 +17,12 @@ class AdminUi extends React.Component {
 
     render() {
         return (
-            <div>
+            <>
                 <Menu />
                 {(this.state.getUsers) && <GetUsers />}
                 {(this.state.getCourses) && <GetCourses />}
                 {(this.state.importCourses) && <ImportCourse />}
-            </div>
+            </>
         )
     }
 }
