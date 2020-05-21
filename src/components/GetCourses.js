@@ -1,54 +1,25 @@
 import React from 'react'
-import { key } from '../key'
-import $ from 'jquery'
-
-const functionName = 'core_course_get_courses_by_field'
-
-const value = 'WS800.MS.2018W.SD'
-
-const field = 'shortname' // id's, shortname, idnumber, category
-
-const data = {
-    wstoken: key.token,
-    wsfunction: functionName,
-    moodlewsrestformat: 'json',
-    field,
-    value
-}
+import { connect } from 'react-redux'
+import { fetchCourses } from '../actions/courses'
 
 class GetCourses extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            responseText: '',
-            data: []
-        }
+    onSubmit = () => {
+        this.props.fetchCourses()
     }
 
-    componentDidMount() {
-        const response = $.ajax(
-            {   
-                type: 'GET',
-                data: data,
-                url: key.url,
-                complete: () => {
-                    console.log(response)
-                    this.setState({
-                        responseText: response.responseText,
-                        data: response.responseJSON
-                    })
-                }
-            }
-        )
-    }
-    
     render() {
         return (
             <div>
-                {(this.state.data.courses) && this.state.data.courses[0].displayname}
+                <button onClick={() => this.onSubmit()}>
+                    Get Courses
+                </button>
             </div>
         )
     }
 }
 
-export default GetCourses
+const mapDispatchToProps = (dispatch) => ({
+    fetchCourses: () => dispatch(fetchCourses())
+})
+
+export default connect(undefined, mapDispatchToProps)(GetCourses)
