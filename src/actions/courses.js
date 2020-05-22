@@ -3,45 +3,31 @@ import $ from 'jquery'
 
 // CREATE_COURSE
 export const createCourse = ({
-    isFetching,
-    status,
-    id = null,
-    username = '',
-    password = '',
-    firstname = '',
-    lastname = '',
-    email = '',
-    auth = 'manual',
-    createdAt = 0
+    fullname,
+    shortname,
+    categoryid,
+    idnumber,
+    summary
+
 } = {}) => ({
     type: 'CREATE_COURSE',
-    isFetching,
-    status,
-    id,
-    username,
-    password,
-    firstname,
-    lastname,
-    email,
-    auth,
-    createdAt
+    fullname,
+    shortname,
+    categoryid,
+    idnumber,
+    summary
 })
 
 // REQUEST_COURSES
-export const requestCourses = ({
-    field, 
-    value
-} = {}) => ({
-    type: 'REQUEST_COURSES',
-    field,
-    value
+export const requestCourses = () => ({
+    type: 'REQUEST_COURSES'
 })
 
 // RECEIVE_COURSES
-export const receiveCourses = ({
+export const receiveCourses = (
     courses,
     status
-}) => ({
+) => ({
     type: 'RECEIVE_COURSES',
     courses,
     status,

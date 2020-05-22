@@ -1,5 +1,5 @@
 import React from 'react'
-import { key } from '../key'
+import { key } from '../../key'
 import $ from 'jquery'
 
 const functionName = 'core_user_create_users'

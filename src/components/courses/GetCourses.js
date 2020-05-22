@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchCourses } from '../actions/courses'
+import { fetchCourses } from '../../actions/courses'
 
 class GetCourses extends React.Component {
     onSubmit = () => {

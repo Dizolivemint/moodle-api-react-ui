@@ -1,43 +1,47 @@
 import React from 'react'
-import { key } from '../key'
+import { key } from '../../key'
 import $ from 'jquery'
 
-const functionName = 'core_user_get_users_by_field'
+const functionName = 'core_course_import_course'
 
-const values = [
-    2
-]
-
-const field = 'id' // idnumber, email, username
+const importFrom = 294
+const importTo = 325
+const deleteContent = 1
+const options = {
+    activities: 1,
+    blocks: 1,
+    filters: 1
+}
 
 const data = {
     wstoken: key.token,
     wsfunction: functionName,
     moodlewsrestformat: 'json',
-    field,
-    values
+    importfrom: importFrom,
+    importto: importTo,
+    deletecontent: deleteContent
 }
 
-class GetUsers extends React.Component {
+class ImportCourse extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             responseText: '',
-            data: []
+            statusText: ''
         }
     }
 
     componentDidMount() {
         const response = $.ajax(
             {   
-                type: 'GET',
+                type: 'POST',
                 data: data,
                 url: key.url,
                 complete: () => {
                     console.log(response)
                     this.setState({
                         responseText: response.responseText,
-                        data: response.responseJSON
+                        statusText: response.statusText
                     })
                 }
             }
@@ -47,19 +51,11 @@ class GetUsers extends React.Component {
     render() {
         return (
             <div>
-                {
-                    this.state.data.map((user, key) => (
-                        <>
-                            {user.username}<br/>
-                            {user.email}<br/>
-                            {user.firstname}<br/>
-                            {user.lastname}<br/>
-                        </>
-                    ))
-                }
+                <p>{this.state.statusText}</p>
+                <p>{this.state.responseText}</p>
             </div>
         )
     }
 }
 
-export default GetUsers
+export default ImportCourse

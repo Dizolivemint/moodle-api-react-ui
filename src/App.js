@@ -6,6 +6,7 @@ import configureStore from './store/configureStore'
 import AdminUi from './components/AdminUi'
 
 const store = configureStore()
+window.store = store
 
 function App() {
   return (

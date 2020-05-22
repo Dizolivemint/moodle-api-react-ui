@@ -1,7 +1,9 @@
 import React from 'react'
-import GetUsers from './GetUsers'
-import GetCourses from './GetCourses'
-import ImportCourse from './ImportCourse'
+import GetUsers from './users/GetUsers'
+import GetCourses from './courses/GetCourses'
+import ImportCourse from './courses/ImportCourse'
+import FilterCourses from './courses/FilterCourses'
+import ListCourses from './courses/ListCourses'
 import Menu from './Menu'
 
 class AdminUi extends React.Component {
@@ -10,6 +12,7 @@ class AdminUi extends React.Component {
         this.state = {
             getUsers: false,
             getCourses: true,
+            filterCourses: true,
             importCourses: false
 
         }
@@ -18,9 +21,11 @@ class AdminUi extends React.Component {
     render() {
         return (
             <>
-                <Menu />
+                {/*<Menu />*/}
                 {(this.state.getUsers) && <GetUsers />}
                 {(this.state.getCourses) && <GetCourses />}
+                {(this.state.filterCourses) && <FilterCourses />}
+                {(this.state.filterCourses) && <ListCourses />}
                 {(this.state.importCourses) && <ImportCourse />}
             </>
         )

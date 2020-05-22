@@ -5,8 +5,12 @@ const coursesReducer = (state = coursesReducerDefaultState, action) => {
         case 'GET_COURSES':
             return [
                 ...state,
-                action.course
+                action.courses
             ]
+        case 'RECEIVE_COURSES':
+            return action.courses
+        case 'REQUEST_COURSES':
+            return state
         case 'IMPORT_COURSE':
             return [
                 ...state,

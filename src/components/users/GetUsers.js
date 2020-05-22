@@ -1,47 +1,43 @@
 import React from 'react'
-import { key } from '../key'
+import { key } from '../../key'
 import $ from 'jquery'
 
-const functionName = 'core_course_import_course'
+const functionName = 'core_user_get_users_by_field'
 
-const importFrom = 294
-const importTo = 325
-const deleteContent = 1
-const options = {
-    activities: 1,
-    blocks: 1,
-    filters: 1
-}
+const values = [
+    2
+]
+
+const field = 'id' // idnumber, email, username
 
 const data = {
     wstoken: key.token,
     wsfunction: functionName,
     moodlewsrestformat: 'json',
-    importfrom: importFrom,
-    importto: importTo,
-    deletecontent: deleteContent
+    field,
+    values
 }
 
-class ImportCourse extends React.Component {
+class GetUsers extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             responseText: '',
-            statusText: ''
+            data: []
         }
     }
 
     componentDidMount() {
         const response = $.ajax(
             {   
-                type: 'POST',
+                type: 'GET',
                 data: data,
                 url: key.url,
                 complete: () => {
                     console.log(response)
                     this.setState({
                         responseText: response.responseText,
-                        statusText: response.statusText
+                        data: response.responseJSON
                     })
                 }
             }
@@ -51,11 +47,19 @@ class ImportCourse extends React.Component {
     render() {
         return (
             <div>
-                <p>{this.state.statusText}</p>
-                <p>{this.state.responseText}</p>
+                {
+                    this.state.data.map((user, key) => (
+                        <>
+                            {user.username}<br/>
+                            {user.email}<br/>
+                            {user.firstname}<br/>
+                            {user.lastname}<br/>
+                        </>
+                    ))
+                }
             </div>
         )
     }
 }
 
-export default ImportCourse
+export default GetUsers
