@@ -13,7 +13,7 @@ export class FilterCourses extends React.Component {
                     type="text"
                     className="text-input"
                     placeholder="XXXX.0X.20XX.XX"
-                    value={this.props.filters.shortName}
+                    value={this.props.filters.shortname}
                     onChange={this.onShortNameChange}
                 />
             </div>
@@ -26,7 +26,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    setCourseFilter: (shortName) => dispatch(setCourseFilter(shortName))
+    setCourseFilter: (shortname) => dispatch(setCourseFilter(shortname))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterCourses)

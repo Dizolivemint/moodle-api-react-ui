@@ -34,16 +34,6 @@ export const receiveCourses = (
     receivedAt: Date.now()
 })
 
-// IMPORT_COURSE
-export const importCourse = ({
-    courseSourceId,
-    courseTargetId,
-}) => ({
-    type: 'IMPORT_COURSE',
-    courseSourceId,
-    courseTargetId
-})
-
 export const invalidateCourses = ({courses}) => ({
   type: 'INVALIDATE_COURSES',
   courses

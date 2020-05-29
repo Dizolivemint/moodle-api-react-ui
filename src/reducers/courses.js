@@ -11,11 +11,6 @@ const coursesReducer = (state = coursesReducerDefaultState, action) => {
             return action.courses
         case 'REQUEST_COURSES':
             return state
-        case 'IMPORT_COURSE':
-            return [
-                ...state,
-                action.success
-            ]
         case 'EDIT_COURSE':
             return
         default:

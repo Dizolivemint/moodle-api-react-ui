@@ -1,5 +1,5 @@
 // SET_COURSE_FILTER
-export const setCourseFilter = (shortName = '') => ({
+export const setCourseFilter = (shortname = '') => ({
     type: 'SET_COURSE_FILTER',
-    shortName
+    shortname
 })

@@ -1,5 +1,5 @@
 const filtersReducerDefaultState = {
-    shortName: 'WS800'
+    shortname: ''
 }
 
 const filtersReducer = (state = filtersReducerDefaultState, action) => {
@@ -7,7 +7,7 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
         case 'SET_COURSE_FILTER':
             return {
                 ...state,
-                shortName: action.shortName
+                shortname: action.shortname
             }
         default:
             return state
