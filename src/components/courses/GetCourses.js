@@ -1,25 +1,45 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { fetchCourses } from '../../actions/courses'
+import { fetchCourses, fetchCoursesByField } from '../../actions/courses'
+import Spinner from '../../svg/Spinner'
+// import { Lines } from 'react-preloaders'
 
-class GetCourses extends React.Component {
-    onSubmit = () => {
-        this.props.fetchCourses()
+const GetCourses = ({ courses, fetchCoursesByField, fetchCourses }) => {
+    const [isLoading, setIsLoading] = useState(false)
+    async function onSubmit () {
+        setIsLoading(true)
+        fetchCoursesByField('category', '69')
+        // fetchCourses()
     }
 
-    render() {
-        return (
-            <div>
-                <button onClick={() => this.onSubmit()}>
+    useEffect(() => {
+        setIsLoading(false)
+    }, [courses])
+
+    return (
+        <div>
+            { isLoading 
+            ?
+                <Spinner /> 
+            :
+                <button onClick={() => onSubmit()}>
                     Get Courses
                 </button>
-            </div>
-        )
+            }
+        </div>
+    )
+
+}
+
+const mapStateToProps = (state) => {
+    return {
+        courses: state.courses
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchCourses: () => dispatch(fetchCourses())
+    fetchCourses: () => dispatch(fetchCourses()),
+    fetchCoursesByField: (field, value) => dispatch(fetchCoursesByField(field, value))
 })
 
-export default connect(undefined, mapDispatchToProps)(GetCourses)
+export default connect(mapStateToProps, mapDispatchToProps)(GetCourses)
