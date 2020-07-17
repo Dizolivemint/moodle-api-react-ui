@@ -20,7 +20,8 @@ export const createCourse = ({
 
 // REQUEST_COURSES
 export const requestCourses = () => ({
-    type: 'REQUEST_COURSES'
+    type: 'REQUEST_COURSES',
+
 })
 
 // RECEIVE_COURSES
@@ -55,7 +56,11 @@ export const fetchCourses = () => {
                 url: key.url,
                 complete: () => {
                     console.log(response)
-                    return dispatch(receiveCourses(response.responseJSON, response.statusText))
+                    if (response.statusText != "success") { 
+                        return dispatch(receiveCourses(null, response.status)) 
+                    } else {
+                        return dispatch(receiveCourses(response.responseJSON, response.statusText))
+                    }
                 }
             }
         )
@@ -64,7 +69,7 @@ export const fetchCourses = () => {
 
 export const fetchCoursesByField = (field, value) => {
     return (dispatch) => {  
-        dispatch(requestCourses(field, value))
+        dispatch(requestCourses())
         const functionName = 'core_course_get_courses_by_field'
         const data = {
             wstoken: key.token,
@@ -80,7 +85,7 @@ export const fetchCoursesByField = (field, value) => {
                 url: key.url,
                 complete: () => {
                     console.log(response)
-                    return dispatch(receiveCourses(response.responseJSON, response.statusText))
+                    return dispatch(receiveCourses(response.responseJSON.courses, response.statusText))
                 }
             }
         )

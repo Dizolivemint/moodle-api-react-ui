@@ -17,7 +17,7 @@ export const setTargetCourse = (
     courseTargetId
 })
 
-// IMPORT_COURSE_REQUES
+// IMPORT_COURSE_REQUEST
 export const importCourseRequest = (
     response, success
 ) => ({
@@ -33,7 +33,7 @@ export const importCourses = (sourceId, targetId) => {
         const functionName = 'core_course_import_course'
         const importFrom = sourceId
         const importTo = targetId
-        const deleteContent = 1
+        const deleteContent = 0
         const options = {
             activities: 1,
             blocks: 1,
@@ -56,7 +56,7 @@ export const importCourses = (sourceId, targetId) => {
                 url: key.url,
                 complete: () => {
                     console.log(response)
-                    return dispatch(importCourseRequest(response.responseJSON, response.statusText))
+                    return dispatch(importCourseRequest(response.responseJSON, response.statusText, {isLoading: false}))
                 }
             }
         )
