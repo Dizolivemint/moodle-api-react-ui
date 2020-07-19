@@ -1,10 +1,13 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { connect } from "react-redux"
 import selectCourses from '../../selectors/courses'
 import ImportCourse from './ImportCourse'
 import { setTargetCourse, setSourceCourse } from '../../actions/import'
 
 const CourseList = (props) => {
+    useEffect(() => {
+        console.log('Courses', props.things)
+    }, [props.things])
     const onSourceClick = (courseSourceId) => {
         props.setSourceCourse(courseSourceId)
         console.log(courseSourceId)
@@ -40,11 +43,11 @@ const CourseList = (props) => {
     </div>
     )
 }
-const mapStateToProps = (state) => {
-    return {
-        courses: selectCourses(state.courses, state.filters)
-    }
-}
+const mapStateToProps = (state) => ({
+        courses: selectCourses(state.courses, state.filters),
+        things: state.things
+})
+
 
 const mapDispatchToProps = (dispatch) => ({
     setTargetCourse: (target) => dispatch(setTargetCourse(target)),

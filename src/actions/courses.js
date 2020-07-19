@@ -19,19 +19,21 @@ export const createCourse = ({
 })
 
 // REQUEST_COURSES
-export const requestCourses = () => ({
+export const requestCourses = (isFetching=true) => ({
     type: 'REQUEST_COURSES',
-
+    isFetching
 })
 
 // RECEIVE_COURSES
 export const receiveCourses = (
     courses,
-    status
+    status,
+    isFetching
 ) => ({
     type: 'RECEIVE_COURSES',
     courses,
     status,
+    isFetching,
     receivedAt: Date.now()
 })
 
@@ -42,7 +44,7 @@ export const invalidateCourses = ({courses}) => ({
 
 export const fetchCourses = () => {
     return (dispatch) => {  
-        dispatch(requestCourses())
+        dispatch(requestCourses(true))
         const functionName = 'core_course_get_courses'
         const data = {
             wstoken: key.token,
@@ -68,8 +70,8 @@ export const fetchCourses = () => {
 }
 
 export const fetchCoursesByField = (field, value) => {
-    return (dispatch) => {  
-        dispatch(requestCourses())
+    return async (dispatch) => {  
+        dispatch(requestCourses(true))
         const functionName = 'core_course_get_courses_by_field'
         const data = {
             wstoken: key.token,
@@ -78,16 +80,15 @@ export const fetchCoursesByField = (field, value) => {
             field, // id's, shortname, idnumber, category
             value
         }
-        const response = $.ajax(
+        const response = await $.ajax(
             {   
                 type: 'GET',
                 data: data,
-                url: key.url,
-                complete: () => {
-                    console.log(response)
-                    return dispatch(receiveCourses(response.responseJSON.courses, response.statusText))
-                }
+                url: key.url
             }
         )
+        console.log('Ajax response', response)
+        dispatch(receiveCourses(response.courses, response.statusText, false))
+        return response
     }
 }

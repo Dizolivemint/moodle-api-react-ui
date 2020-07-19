@@ -1,18 +1,13 @@
 const coursesReducerDefaultState = []
 
 const coursesReducer = (state = coursesReducerDefaultState, action) => {
+    // console.log('State', state)
+    // console.log('Action', action)
     switch (action.type) {
-        case 'GET_COURSES':
-            return [
-                ...state,
-                action.courses
-            ]
         case 'RECEIVE_COURSES':
-            return action.courses
+            return [...state, ...action.courses]
         case 'REQUEST_COURSES':
             return state
-        case 'EDIT_COURSE':
-            return
         default:
             return state
     }

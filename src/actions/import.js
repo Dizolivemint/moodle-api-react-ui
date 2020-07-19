@@ -27,13 +27,13 @@ export const importCourseRequest = (
     receivedAt: Date.now()
 })
 
-export const importCourses = (sourceId, targetId) => {
+export const importCourses = (sourceId, targetId, clear="0") => {
     return (dispatch) => {  
         dispatch(importCourseRequest())
         const functionName = 'core_course_import_course'
         const importFrom = sourceId
         const importTo = targetId
-        const deleteContent = 0
+        const deleteContent = parseInt(clear)
         const options = {
             activities: 1,
             blocks: 1,
@@ -56,7 +56,7 @@ export const importCourses = (sourceId, targetId) => {
                 url: key.url,
                 complete: () => {
                     console.log(response)
-                    return dispatch(importCourseRequest(response.responseJSON, response.statusText, {isLoading: false}))
+                    return dispatch(importCourseRequest(response.responseJSON, response.statusText))
                 }
             }
         )
