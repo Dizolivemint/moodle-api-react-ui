@@ -48,7 +48,7 @@ export const CsvDropzone = (props) => {
               }
             }
 
-            const { fetchCoursesByField, courses } = props
+            const { fetchCoursesByField, courses, importCourses } = props
             const start = async () => {
               asyncForEach(toJson, async (row) => {
                 const {source, target, clear} = row
@@ -59,6 +59,9 @@ export const CsvDropzone = (props) => {
                 console.log('Target Response', targetRes)
                 const targetId = targetRes.courses[0].id
                 console.log('Source to Target', `${sourceId} to ${targetId}`)
+                console.log('Clear', clear)
+                const importRes = await importCourses(sourceId, targetId, clear)
+                console.log('Import response', importRes)
               })
             }
 

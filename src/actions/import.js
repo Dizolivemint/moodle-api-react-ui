@@ -19,21 +19,31 @@ export const setTargetCourse = (
 
 // IMPORT_COURSE_REQUEST
 export const importCourseRequest = (
-    response, success
+    isFetching=true
 ) => ({
-    type: 'IMPORT_COURSE',
+    type: 'IMPORT_COURSE_REQUEST',
+    isFetching
+})
+
+// IMPORT_COURSE_FINSIH
+export const importCourseFinish = (
+    response, isFetching
+) => ({
+    type: 'IMPORT_COURSE_FINISH',
     response,
-    success,
+    isFetching,
     receivedAt: Date.now()
 })
 
-export const importCourses = (sourceId, targetId, clear="0") => {
-    return (dispatch) => {  
-        dispatch(importCourseRequest())
+export const importCourses = (sourceId, targetId, clear='0') => {
+    console.log("Here")
+    return async (dispatch) => {  
+        dispatch(importCourseRequest(true))
+        console.log('Something')
         const functionName = 'core_course_import_course'
         const importFrom = sourceId
         const importTo = targetId
-        const deleteContent = parseInt(clear)
+        const deleteContent = clear
         const options = {
             activities: 1,
             blocks: 1,
@@ -49,16 +59,14 @@ export const importCourses = (sourceId, targetId, clear="0") => {
             deletecontent: deleteContent
         }
 
-        const response = $.ajax(
+        const response = await $.ajax(
             {   
                 type: 'GET',
                 data: data,
-                url: key.url,
-                complete: () => {
-                    console.log(response)
-                    return dispatch(importCourseRequest(response.responseJSON, response.statusText))
-                }
+                url: key.url
             }
         )
+        dispatch(importCourseFinish(response, false))
+        return response
     }
 }

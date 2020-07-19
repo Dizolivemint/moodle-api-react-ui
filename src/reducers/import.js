@@ -15,11 +15,10 @@ const importReducer = (state = importReducerDefaultState, action) => {
                 ...state,
                 courseTargetId: action.courseTargetId
             }
-        case 'IMPORT_COURSE':
-            return {
-                ...state,
-                success: action.success
-            }
+        case 'IMPORT_COURSE_REQUEST':
+            return state
+        case 'IMPORT_COURSE_FINISH':
+            return state
         default:
             return state
     }
