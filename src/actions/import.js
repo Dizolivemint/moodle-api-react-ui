@@ -36,10 +36,8 @@ export const importCourseFinish = (
 })
 
 export const importCourses = (sourceId, targetId, clear='0') => {
-    console.log("Here")
     return async (dispatch) => {  
         dispatch(importCourseRequest(true))
-        console.log('Something')
         const functionName = 'core_course_import_course'
         const importFrom = sourceId
         const importTo = targetId
